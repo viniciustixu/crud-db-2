@@ -24,3 +24,14 @@ export async function GET() {
   const topics = await Topic.find();
   return NextResponse.json({ topics }, { status: 200 });
 }
+
+
+
+export async function DELETE(req) {
+  const body = await req.json();
+  const { id } = body;
+
+  await connectToDatabase();
+  await Topic.findByIdAndDelete(id);
+  return NextResponse.json({ message: 'Topico deletado' }, { status: 200 });
+}
